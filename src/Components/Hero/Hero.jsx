@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import videoWebM from '../../assets/video/Rainbow_Nebula_4K_Motion_Background.webm';
+import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
 // Import your resume PDF file
-import resumePDF from '../../assets/resume.pdf'; // ADD THIS LINE - Make sure you have resume.pdf in your assets folder
+import resumePDF from '/public/resume.pdf'; 
 
 
 const Hero = () => {

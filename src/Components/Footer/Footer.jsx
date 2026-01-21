@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import videoWebM from "../../assets/video/Rainbow_Nebula_4K_Motion_Background.webm";
+import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
 
 // Register GSAP ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);

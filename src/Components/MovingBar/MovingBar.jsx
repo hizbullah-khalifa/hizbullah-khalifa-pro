@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import videoWebM from '../../assets/video/Rainbow_Nebula_4K_Motion_Background.webm';
-
+import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
 // Utility function for random premium colors
 const getRandomPremiumColor = () => {
   const colors = [
