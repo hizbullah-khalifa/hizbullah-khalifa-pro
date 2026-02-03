@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './NewAbout.css';
-import { FaCode, FaDatabase, FaServer, FaCogs } from 'react-icons/fa';
+import { FaCode, FaDatabase, FaServer } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-const videoWebM = '/video/Rainbow_Nebula_4K_Motion_Background.webm'
-import { SiWordpress } from "react-icons/si";
-import { SiFastapi } from "react-icons/si";
+import { SiWordpress, SiFastapi } from "react-icons/si";
 import { FaCloudUploadAlt } from "react-icons/fa";
 
+const videoWebM = '/video/Rainbow_Nebula_4K_Motion_Background.webm';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +22,7 @@ const NewAbout = () => {
   const floatingElementsRef = useRef([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   // Check if mobile on mount and resize
   useEffect(() => {
@@ -36,13 +36,29 @@ const NewAbout = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Video loading handler
+  // Video loading handler with timeout fallback
   useEffect(() => {
+    // Always show content after 3 seconds, even if video doesn't load
+    const timeoutId = setTimeout(() => {
+      console.log('Timeout reached - showing content');
+      setIsLoaded(true);
+    }, 3000);
+
     if (videoRef.current) {
       const video = videoRef.current;
       
       const handleVideoLoad = () => {
+        console.log('Video loaded successfully');
+        clearTimeout(timeoutId);
         setIsLoaded(true);
+        setVideoError(false);
+      };
+
+      const handleVideoError = (e) => {
+        console.error('Video failed to load:', e);
+        clearTimeout(timeoutId);
+        setIsLoaded(true);
+        setVideoError(true);
       };
 
       if (video.readyState >= 3) {
@@ -50,13 +66,24 @@ const NewAbout = () => {
       } else {
         video.addEventListener('loadeddata', handleVideoLoad);
         video.addEventListener('canplaythrough', handleVideoLoad);
+        video.addEventListener('error', handleVideoError);
       }
 
       return () => {
+        clearTimeout(timeoutId);
         video.removeEventListener('loadeddata', handleVideoLoad);
         video.removeEventListener('canplaythrough', handleVideoLoad);
+        video.removeEventListener('error', handleVideoError);
       };
+    } else {
+      // If video element doesn't exist, show content anyway
+      clearTimeout(timeoutId);
+      setIsLoaded(true);
     }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -72,8 +99,8 @@ const NewAbout = () => {
       // Initialize main timeline
       mainTimeline = gsap.timeline({ paused: true });
 
-      // Video background setup with smoother transition
-      if (videoRef.current) {
+      // Video background setup with smoother transition (only if video loaded)
+      if (videoRef.current && !videoError) {
         gsap.set(videoRef.current, {
           scale: 1.1,
           filter: 'brightness(0.3) contrast(1.1) hue-rotate(180deg)',
@@ -91,7 +118,7 @@ const NewAbout = () => {
       if (!isMobile) {
         floatingElementsRef.current.forEach((element, index) => {
           if (element) {
-            gsap.set(element, { force3D: true }); // Hardware acceleration
+            gsap.set(element, { force3D: true });
             gsap.to(element, {
               y: -20,
               x: 10,
@@ -109,7 +136,7 @@ const NewAbout = () => {
       // Enhanced main content animations
       mainTimeline
         .set([contentRef.current, titleRef.current, paraRef.current, ...boxesRef.current], {
-          force3D: true // Hardware acceleration for all elements
+          force3D: true
         })
         .fromTo(
           contentRef.current,
@@ -162,7 +189,7 @@ const NewAbout = () => {
       // Skill boxes with smoother stagger
       boxesRef.current.forEach((box, index) => {
         if (box) {
-          gsap.set(box, { force3D: true }); // Hardware acceleration
+          gsap.set(box, { force3D: true });
           mainTimeline.fromTo(
             box,
             { 
@@ -195,7 +222,6 @@ const NewAbout = () => {
 
       // Desktop-only advanced interactions
       if (!isMobile && !isTablet) {
-        // Throttled mouse parallax for better performance
         let mouseX = 0, mouseY = 0;
         let targetX = 0, targetY = 0;
         let rafId;
@@ -207,7 +233,6 @@ const NewAbout = () => {
           targetX = (mouseX - centerX) * 0.02;
           targetY = (mouseY - centerY) * 0.02;
 
-          // Smooth lerp for parallax
           boxesRef.current.forEach((box, index) => {
             if (box) {
               const factor = (index + 1) * 0.5;
@@ -229,7 +254,6 @@ const NewAbout = () => {
           mouseY = e.clientY;
         };
 
-        // Optimized scroll handler
         scrollHandler = () => {
           if (!sectionRef.current) return;
           
@@ -241,7 +265,7 @@ const NewAbout = () => {
           if (scrolled + windowHeight > sectionTop && scrolled < sectionTop + sectionHeight) {
             const parallaxValue = (scrolled - sectionTop) * 0.2;
             
-            if (videoRef.current) {
+            if (videoRef.current && !videoError) {
               gsap.to(videoRef.current, {
                 y: parallaxValue,
                 duration: 0.3,
@@ -264,10 +288,8 @@ const NewAbout = () => {
       }
     };
 
-    // Use requestAnimationFrame for smoother initialization
     const rafId = requestAnimationFrame(initAnimations);
 
-    // Cleanup
     return () => {
       cancelAnimationFrame(rafId);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -281,7 +303,7 @@ const NewAbout = () => {
         ...floatingElementsRef.current
       ]);
     };
-  }, [isLoaded, isMobile]);
+  }, [isLoaded, isMobile, videoError]);
 
   return (
     <div 
@@ -306,7 +328,8 @@ const NewAbout = () => {
           muted
           playsInline
           className="background-video"
-          preload="metadata"
+          preload="auto"
+          style={{ display: videoError ? 'none' : 'block' }}
         >
           <source src={videoWebM} type="video/webm" />
         </video>
@@ -375,17 +398,17 @@ const NewAbout = () => {
             {
               icon: <SiWordpress className="icon" aria-label="CMS Development" />,
               title: 'CMS Development',
-              description: 'Developing fully customized, scalable websites and blogs with Wix , webflow , Wordpress leveraging its extensive plugin ecosystem and strong global community support.',
+              description: 'Developing fully customized, scalable websites and blogs with Wix, webflow, Wordpress leveraging its extensive plugin ecosystem and strong global community support.',
             },
             {
               icon: <SiFastapi className="icon" aria-label="API Development" />,
               title: 'API Integration',
               description: 'Seamlessly integrating third-party APIs, secure payment gateways, and robust authentication systems to enhance functionality, scalability, and user experience.',
             },
-             {
+            {
               icon: <FaCloudUploadAlt className="icon" aria-label="Maintenance" />,
               title: 'Deployment & Maintenance',
-              description: 'Seamlessly integrating third-party APIs, secure payment gateways, and robust authentication systems to enhance functionality, scalability, and user experience.',
+              description: 'Deploying applications to cloud platforms and ensuring continuous maintenance, updates, and monitoring for optimal performance and security.',
             },
           ].map((item, index) => (
             <div
