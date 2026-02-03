@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 // ✅ CORRECT - Must start with forward slash /
-const videoWebM = '/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = '/video/Rainbow_Nebula_4K_Motion_Background.WebM';
 const resumePDF = '/resume.pdf';
 
 
