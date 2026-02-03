@@ -3,7 +3,7 @@ import './NewAbout.css';
 import { FaCode, FaDatabase, FaServer, FaCogs } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
 import { SiWordpress } from "react-icons/si";
 import { SiFastapi } from "react-icons/si";
 import { FaCloudUploadAlt } from "react-icons/fa";

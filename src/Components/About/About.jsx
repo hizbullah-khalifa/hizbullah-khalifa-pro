@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaGithub, FaPhp, FaBootstrap } from 'react-icons/fa';
 import { SiJavascript, SiHtml5, SiCss3, SiMongodb, SiExpress, SiTailwindcss, SiPostman } from 'react-icons/si';
-import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
 
 const About = () => {
   const containerRef = useRef(null);

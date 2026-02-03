@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
 
 const Loader = () => {
   const videoRef = useRef(null);

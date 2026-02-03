@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import videoWebM from '/public/video/Rainbow_Nebula_4K_Motion_Background.webm';
-// Import your resume PDF file
-import resumePDF from '/public/resume.pdf'; 
+
+// ✅ CORRECT - Must start with forward slash /
+const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const resumePDF = '/resume.pdf';
 
 
 const Hero = () => {
