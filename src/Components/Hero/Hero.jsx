@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 // ✅ CORRECT - Must start with forward slash /
-const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = '/video/Rainbow_Nebula_4K_Motion_Background.webm';
 const resumePDF = '/resume.pdf';
 
 
@@ -93,7 +93,7 @@ const Hero = () => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           loading="lazy"
           style={{
             width: isMobile ? '100%' : '120%',
@@ -107,6 +107,9 @@ const Hero = () => {
             willChange: isMobile ? 'auto' : 'transform',
           }}
           aria-hidden="true"
+          onError={(e) => {
+            console.error('Video failed to load:', e);
+          }}
         >
           <source src={videoWebM} type="video/webm" />
           <track kind="captions" srcLang="en" label="Background video" />
@@ -226,7 +229,7 @@ const Hero = () => {
           I design modern, responsive websites with clean code, fluid animations & intuitive user experiences, delivering engaging digital solutions that merge creativity, performance, and seamless functionality.
         </p>
 
-        {/* Action Buttons */}
+        {/* Action Buttons - FIXED MOBILE SIZING */}
         <div
           ref={actionRef}
           style={{
@@ -236,6 +239,7 @@ const Hero = () => {
             alignItems: 'center',
             justifyContent: 'center',
             width: isMobile ? '100%' : 'auto',
+            maxWidth: isMobile ? '280px' : 'none',
             opacity: 0,
             transform: 'translateY(15px)',
             transition: 'opacity 0.6s ease, transform 0.6s ease',
@@ -244,8 +248,8 @@ const Hero = () => {
           <a
             href="#Contact"
             style={{
-              padding: isMobile ? '0.75rem 1.25rem' : '0.9rem 1.8rem',
-              fontSize: isMobile ? '0.95rem' : '1rem',
+              padding: isMobile ? '0.7rem 1.5rem' : '0.9rem 1.8rem',
+              fontSize: isMobile ? '0.9rem' : '1rem',
               fontWeight: 600,
               color: '#ffffff',
               textDecoration: 'none',
@@ -253,9 +257,9 @@ const Hero = () => {
               borderRadius: '9999px',
               boxShadow: '0 8px 20px rgba(99, 102, 241, 0.2)',
               width: isMobile ? '100%' : 'auto',
-              maxWidth: isMobile ? '250px' : 'none',
               textAlign: 'center',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              whiteSpace: 'nowrap',
             }}
             onMouseEnter={(e) => {
               if (!isMobile) {
@@ -277,8 +281,8 @@ const Hero = () => {
             href={resumePDF}
             download="Hizbullah_Khalifa_Resume.pdf"
             style={{
-              padding: isMobile ? '0.75rem 1.25rem' : '0.9rem 1.8rem',
-              fontSize: isMobile ? '0.95rem' : '1rem',
+              padding: isMobile ? '0.7rem 1.5rem' : '0.9rem 1.8rem',
+              fontSize: isMobile ? '0.9rem' : '1rem',
               fontWeight: 600,
               color: '#ffffff',
               textDecoration: 'none',
@@ -286,9 +290,9 @@ const Hero = () => {
               border: '2px solid rgba(255, 255, 255, 0.15)',
               borderRadius: '9999px',
               width: isMobile ? '100%' : 'auto',
-              maxWidth: isMobile ? '250px' : 'none',
               textAlign: 'center',
               transition: 'transform 0.2s ease, background 0.2s ease, border-color 0.2s ease',
+              whiteSpace: 'nowrap',
             }}
             onMouseEnter={(e) => {
               if (!isMobile) {
