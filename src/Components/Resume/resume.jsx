@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GraduationCap, Briefcase, Award, ExternalLink } from 'lucide-react';
-const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = '/Rainbow_Nebula_4K_Motion_Background.webm';
 
 const Resume = () => {
   const [isMobile, setIsMobile] = useState(false);
