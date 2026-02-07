@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 const videoWebM = '/Rainbow_Nebula_4K_Motion_Background.webm';
 const resumePDF = '/resume.pdf';
 
-
 const Hero = () => {
   const heroRef = useRef(null);
   const contentRef = useRef(null);
@@ -111,7 +110,6 @@ const Hero = () => {
           <track kind="captions" srcLang="en" label="Background video" />
         </video>
       </div>
-      
 
       {/* Overlay */}
       <div
@@ -142,8 +140,6 @@ const Hero = () => {
         }}
         aria-hidden="true"
       />
-      
-      
 
       {/* Main Content */}
       <div
@@ -155,14 +151,13 @@ const Hero = () => {
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          padding: isMobile ? '0 1rem' : '0 2rem',
+          padding: isMobile ? '0 1.5rem' : '0 2rem',
           maxWidth: '1000px',
           width: '100%',
           opacity: 0,
           transform: 'translateY(20px)',
           transition: 'opacity 0.6s ease, transform 0.6s ease',
         }}
-        
       >
         {/* Title */}
         <h1
@@ -171,7 +166,7 @@ const Hero = () => {
             fontSize: isMobile ? 'clamp(1.8rem, 7vw, 2.8rem)' : 'clamp(2.2rem, 5vw, 4rem)',
             fontWeight: 700,
             color: '#ffffff',
-            marginBottom: isMobile ? '0.8rem' : '1.2rem',
+            marginBottom: isMobile ? '1rem' : '1.5rem',
             opacity: 0,
             transform: 'translateY(15px)',
             transition: 'opacity 0.6s ease, transform 0.6s ease',
@@ -180,7 +175,7 @@ const Hero = () => {
           role="heading"
           aria-level="1"
         >
-          <span style={{ display: 'block', marginBottom: isMobile ? '0.4rem' : '0.8rem' }}>
+          <span style={{ display: 'block', marginBottom: isMobile ? '0.5rem' : '0.8rem' }}>
             Hello, I'm{' '}
             <span
               style={{
@@ -196,7 +191,7 @@ const Hero = () => {
           </span>
           <span
             style={{
-              fontSize: isMobile ? 'clamp(1rem, 5vw, 1.6rem)' : 'clamp(1.3rem, 3vw, 2rem)',
+              fontSize: isMobile ? 'clamp(1rem, 5vw, 1.4rem)' : 'clamp(1.3rem, 3vw, 2rem)',
               fontWeight: 400,
               color: '#e5e7eb',
               display: 'block',
@@ -205,18 +200,16 @@ const Hero = () => {
             Web Developer from Pakistan
           </span>
         </h1>
-        
-
 
         {/* Description */}
         <p
           ref={descriptionRef}
           style={{
-            fontSize: isMobile ? 'clamp(0.9rem, 3.5vw, 1rem)' : 'clamp(1rem, 1.8vw, 1.15rem)',
+            fontSize: isMobile ? 'clamp(0.9rem, 4vw, 1.05rem)' : 'clamp(1rem, 1.8vw, 1.15rem)',
             color: '#d1d5db',
-            maxWidth: isMobile ? '100%' : '550px',
-            lineHeight: 1.6,
-            marginBottom: isMobile ? '1.5rem' : '2rem',
+            maxWidth: isMobile ? '100%' : '600px',
+            lineHeight: 1.7,
+            marginBottom: isMobile ? '2rem' : '2.5rem',
             opacity: 0,
             transform: 'translateY(15px)',
             transition: 'opacity 0.6s ease, transform 0.6s ease',
@@ -225,68 +218,74 @@ const Hero = () => {
           I design modern, responsive websites with clean code, fluid animations & intuitive user experiences, delivering engaging digital solutions that merge creativity, performance, and seamless functionality.
         </p>
 
-        {/* Action Buttons */}
+        {/* Action Buttons - FIXED FOR MOBILE */}
         <div
           ref={actionRef}
           style={{
             display: 'flex',
             flexDirection: isMobile ? 'column' : 'row',
-            gap: isMobile ? '0.8rem' : '1.2rem',
+            gap: isMobile ? '1rem' : '1.2rem',
             alignItems: 'center',
             justifyContent: 'center',
             width: isMobile ? '100%' : 'auto',
+            maxWidth: isMobile ? '320px' : 'none',
             opacity: 0,
             transform: 'translateY(15px)',
             transition: 'opacity 0.6s ease, transform 0.6s ease',
           }}
         >
-          
+          <a
             href="#Contact"
             style={{
-              padding: isMobile ? '0.75rem 1.25rem' : '0.9rem 1.8rem',
+              padding: isMobile ? '0.85rem 1.5rem' : '0.9rem 1.8rem',
               fontSize: isMobile ? '0.95rem' : '1rem',
               fontWeight: 600,
               color: '#ffffff',
               textDecoration: 'none',
               background: 'linear-gradient(135deg, #6366f1, #a855f7)',
               borderRadius: '9999px',
-              boxShadow: '0 8px 20px rgba(99, 102, 241, 0.2)',
+              boxShadow: '0 8px 20px rgba(99, 102, 241, 0.3)',
               width: isMobile ? '100%' : 'auto',
-              maxWidth: isMobile ? '250px' : 'none',
               textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
             onMouseEnter={(e) => {
               if (!isMobile) {
                 e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 12px 25px rgba(99, 102, 241, 0.3)';
+                e.target.style.boxShadow = '0 12px 25px rgba(99, 102, 241, 0.4)';
               }
             }}
             onMouseLeave={(e) => {
               if (!isMobile) {
                 e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.2)';
+                e.target.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.3)';
               }
             }}
             aria-label="Connect with Hizbullah Khalifa"
           >
             Connect with me
           </a>
-          
+
+          <a
             href={resumePDF}
             download="Hizbullah_Khalifa_Resume.pdf"
             style={{
-              padding: isMobile ? '0.75rem 1.25rem' : '0.9rem 1.8rem',
+              padding: isMobile ? '0.85rem 1.5rem' : '0.9rem 1.8rem',
               fontSize: isMobile ? '0.95rem' : '1rem',
               fontWeight: 600,
               color: '#ffffff',
               textDecoration: 'none',
-              background: 'rgba(255, 255, 255, 0.08)',
-              border: '2px solid rgba(255, 255, 255, 0.15)',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '2px solid rgba(255, 255, 255, 0.2)',
               borderRadius: '9999px',
               width: isMobile ? '100%' : 'auto',
-              maxWidth: isMobile ? '250px' : 'none',
               textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               transition: 'transform 0.2s ease, background 0.2s ease, border-color 0.2s ease',
             }}
             onMouseEnter={(e) => {
@@ -299,8 +298,8 @@ const Hero = () => {
             onMouseLeave={(e) => {
               if (!isMobile) {
                 e.target.style.transform = 'translateY(0)';
-                e.target.style.background = 'rgba(255, 255, 255, 0.08)';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
               }
             }}
             aria-label="Download Hizbullah Khalifa resume"
@@ -315,7 +314,7 @@ const Hero = () => {
         <div
           style={{
             position: 'absolute',
-            bottom: '1.5rem',
+            bottom: '2rem',
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 3,
@@ -324,8 +323,8 @@ const Hero = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '0.4rem',
-            opacity: 0.6,
+            gap: '0.5rem',
+            opacity: 0.7,
             transition: 'opacity 0.3s ease',
           }}
           aria-hidden="true"
@@ -334,15 +333,14 @@ const Hero = () => {
           <div
             style={{
               width: '2px',
-              height: '25px',
+              height: '30px',
               background: 'linear-gradient(to bottom, #6366f1, transparent)',
               borderRadius: '2px',
+              animation: 'bounce 2s infinite',
             }}
           />
         </div>
       )}
-
-      
 
       {/* Inline Critical CSS */}
       <style>
@@ -350,6 +348,10 @@ const Hero = () => {
           @keyframes gridMove {
             0% { transform: translate(0, 0); }
             100% { transform: translate(40px, 40px); }
+          }
+          @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
           }
           .animate-in {
             opacity: 1 !important;
