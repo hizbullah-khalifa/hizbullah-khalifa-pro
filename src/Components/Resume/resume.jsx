@@ -41,7 +41,7 @@ const Resume = () => {
     {
       degree: 'Intermediate (HSSC)',
       year: '2020 - 2022',
-      institution: 'Govt Higher Secondary School Sahib, Timergara',
+      institution: 'Govt Higher Secondary School Saddo, Timergara',
     },
     {
       degree: 'Bachelor (BSCS)',
@@ -53,7 +53,7 @@ const Resume = () => {
   const experienceData = [
     {
       position: 'Fiverr',
-      duration: 'August 2022 - Present',
+      duration: 'August 2022 - Jan 2023',
       company: 'Web & Webflow Dev',
     },
     {
@@ -63,8 +63,13 @@ const Resume = () => {
     },
     {
       position: 'Self-Employed',
-      duration: 'October 2024 - Present',
+      duration: 'October 2024 -   July 2025',
       company: '(Remote)',
+    },
+       {
+      position: 'Web Developer & Web Instructor',
+      duration: 'Nov 2025 - Present',
+      company: 'Lewal Technologies | Internship',
     },
   ];
 
