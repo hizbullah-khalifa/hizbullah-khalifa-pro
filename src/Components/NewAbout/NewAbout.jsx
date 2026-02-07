@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SiWordpress, SiFastapi } from "react-icons/si";
 import { FaCloudUploadAlt } from "react-icons/fa";
 
-const videoWebM = '/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = '/Rainbow_Nebula_4K_Motion_Background.webm';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
