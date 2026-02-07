@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = '/Rainbow_Nebula_4K_Motion_Background.webm';
 const About = () => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
