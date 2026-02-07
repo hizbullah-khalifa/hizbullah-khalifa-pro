@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { Mail, MapPin, Phone, Send, User, MessageSquare } from 'lucide-react';
-const videoWebM = 'public/video/Rainbow_Nebula_4K_Motion_Background.webm';
+const videoWebM = '/Rainbow_Nebula_4K_Motion_Background.webm';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
