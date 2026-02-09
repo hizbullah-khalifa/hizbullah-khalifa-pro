@@ -1,5 +1,45 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
+// Typewriter Component
+const Typewriter = ({ words, typeSpeed = 70, deleteSpeed = 50, delaySpeed = 2000 }) => {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = words[currentWordIndex];
+    
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        if (currentText.length < currentWord.length) {
+          setCurrentText(currentWord.slice(0, currentText.length + 1));
+        } else {
+          // Wait before deleting
+          setTimeout(() => setIsDeleting(true), delaySpeed);
+        }
+      } else {
+        // Deleting
+        if (currentText.length > 0) {
+          setCurrentText(currentText.slice(0, -1));
+        } else {
+          setIsDeleting(false);
+          setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }
+    }, isDeleting ? deleteSpeed : typeSpeed);
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentWordIndex, words, typeSpeed, deleteSpeed, delaySpeed]);
+
+  return (
+    <span>
+      {currentText}
+      <span style={{ opacity: 0.7, animation: 'blink 1s infinite' }}>_</span>
+    </span>
+  );
+};
+
 // ✅ CORRECT - Must start with forward slash /
 const videoWebM = '/Rainbow_Nebula_4K_Motion_Background.webm';
 const resumePDF = '/resume.pdf';
@@ -191,13 +231,27 @@ const Hero = () => {
           </span>
           <span
             style={{
-              fontSize: isMobile ? 'clamp(1rem, 5vw, 1.4rem)' : 'clamp(1.3rem, 3vw, 2rem)',
+              fontSize: isMobile ? 'clamp(0.95rem, 4.5vw, 1.3rem)' : 'clamp(1.2rem, 2.8vw, 1.8rem)',
               fontWeight: 400,
               color: '#e5e7eb',
               display: 'block',
+              lineHeight: 1.4,
             }}
           >
-            Web Developer from Pakistan
+            <Typewriter
+              words={[
+                "Web Developer",
+                "MERN Stack Developer",
+                "JavaScript Developer",
+                "UI/UX Designer",
+                "Problem Solver",
+                "Tech Enthusiast",
+                "Constant Learner",
+              ]}
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={2000}
+            />
           </span>
         </h1>
 
@@ -352,6 +406,10 @@ const Hero = () => {
           @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(8px); }
+          }
+          @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
           }
           .animate-in {
             opacity: 1 !important;
