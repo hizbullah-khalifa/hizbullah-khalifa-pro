@@ -13,7 +13,7 @@ const About = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const profileImageUrl = "https://image2url.com/r2/default/images/1768735226295-5d158032-2b5e-4d14-b137-8e2324a98d0d.png";
+  const profileImageUrl = "https://continued-coral-sdwsygswne.edgeone.app/folder.png";
 
   // Tech stack with actual logo URLs from CDN
   const techStack = [
